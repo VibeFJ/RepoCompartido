@@ -1,0 +1,133 @@
+import java.util.Scanner;
+
+class AtributosFigura {
+    double base;
+    double altura;
+}
+
+class CalculadoraFiguras {
+    public static double calcularAreaCuadrado(double lado) {
+        return lado * lado;
+    }
+
+    public static double calcularPerimetroCuadrado(double lado) {
+        return 4 * lado;
+    }
+
+    public static double calcularAreaTriangulo(double base, double altura) {
+        return (base * altura) / 2;
+    }
+
+    public static double calcularPerimetroTriangulo(double lado1, double lado2, double lado3) {
+        return lado1 + lado2 + lado3;
+    }
+
+    public static double calcularAreaRectangulo(double base, double altura) {
+        return base * altura;
+    }
+
+    public static double calcularPerimetroRectangulo(double lado1, double lado2) {
+        return 2 * (lado1 + lado2);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int opcionMenuPrincipal;
+
+        do {
+            System.out.println("MENU PRINCIPAL");
+            System.out.println("1. Calcular Área");
+            System.out.println("2. Calcular Perímetro");
+            System.out.println("3. Salir");
+            System.out.print("Seleccione una opción: ");
+            opcionMenuPrincipal = scanner.nextInt();
+
+            switch (opcionMenuPrincipal) {
+                case 1:
+                    menuFiguras("Área", scanner);
+                    break;
+                case 2:
+                    menuFiguras("Perímetro", scanner);
+                    break;
+                case 3:
+                    System.out.println("Saliendo...");
+                    break;
+                default:
+                    System.out.println("Opción no válida. Intente de nuevo.");
+            }
+        } while (opcionMenuPrincipal != 3);
+    }
+
+    public static void menuFiguras(String operacion, Scanner scanner) {
+        int opcionFigura;
+        do {
+            System.out.println("\nMENU DE FIGURAS");
+            System.out.println("1. Cuadrado");
+            System.out.println("2. Triángulo");
+            System.out.println("3. Rectángulo");
+            System.out.println("4. Volver al menú principal");
+            System.out.print("Seleccione una figura: ");
+            opcionFigura = scanner.nextInt();
+
+            AtributosFigura atributosFigura = new AtributosFigura();
+
+            switch (opcionFigura) {
+                case 1:
+                    System.out.print("Ingrese el lado del cuadrado: ");
+                    atributosFigura.base = scanner.nextDouble();
+                    atributosFigura.altura = atributosFigura.base;
+                    calcular(operacion, "cuadrado", atributosFigura);
+                    break;
+                case 2:
+                    System.out.print("Ingrese la base del triángulo: ");
+                    atributosFigura.base = scanner.nextDouble();
+                    System.out.print("Ingrese la altura del triángulo: ");
+                    atributosFigura.altura = scanner.nextDouble();
+                    calcular(operacion, "triángulo", atributosFigura);
+                    break;
+                case 3:
+                    System.out.print("Ingrese la base del rectángulo: ");
+                    atributosFigura.base = scanner.nextDouble();
+                    System.out.print("Ingrese la altura del rectángulo: ");
+                    atributosFigura.altura = scanner.nextDouble();
+                    calcular(operacion, "rectángulo", atributosFigura);
+                    break;
+                case 4:
+                    System.out.println("Volviendo al menú principal...");
+                    break;
+                default:
+                    System.out.println("Opción no válida. Intente de nuevo.");
+            }
+        } while (opcionFigura != 4);
+    }
+
+    public static void calcular(String operacion, String figura, AtributosFigura atributos) {
+        CalculadoraFiguras calculadora = new CalculadoraFiguras();
+        double resultado = 0;
+
+        switch (figura) {
+            case "cuadrado":
+                if (operacion.equals("Área"))
+                    resultado = calculadora.calcularAreaCuadrado(atributos.base);
+                else if (operacion.equals("Perímetro"))
+                    resultado = calculadora.calcularPerimetroCuadrado(atributos.base);
+                break;
+            case "triángulo":
+                if (operacion.equals("Área"))
+                    resultado = calculadora.calcularAreaTriangulo(atributos.base, atributos.altura);
+                else if (operacion.equals("Perímetro"))
+                    resultado = calculadora.calcularPerimetroTriangulo(atributos.base, atributos.altura, atributos.base);
+                break;
+            case "rectángulo":
+                if (operacion.equals("Área"))
+                    resultado = calculadora.calcularAreaRectangulo(atributos.base, atributos.altura);
+                else if (operacion.equals("Perímetro"))
+                    resultado = calculadora.calcularPerimetroRectangulo(atributos.base, atributos.altura);
+                break;
+        }
+
+        System.out.println(operacion + " de " + figura + ": " + resultado);
+    }
+}
