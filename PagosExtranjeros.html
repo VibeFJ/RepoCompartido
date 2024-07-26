@@ -1,0 +1,312 @@
+﻿<!-- @model Models.BdSisInfEntities.OC_Maestro_Compra_2
+
+@{
+    Layout = null;
+
+    //Layout = "~/Views/Shared/_Layout_Global.cshtml";
+    var FechaOrden = ViewBag.FechaOrden.ToString("dd/MM/yyyy");
+    var TotalLetra = ViewBag.TotalLetra;
+    var CentavosTotal = ViewBag.centavosTotal;
+    var clObjetoSocial = ViewBag.clObejtoSocial;
+    var Img = ViewBag.img;
+
+    var x = Model;
+
+} -->
+
+<style>
+    body {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        font-family: Calibri;
+        font-size: 16px;
+    }
+
+    .watermark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        opacity: 0.1;
+        background: url('https://th.bing.com/th/id/R.979c0d2dab288d9dea98934cedd2db84?rik=%2bn%2bfMEsju50Kkw&riu=http%3a%2f%2frahabogados.com.mx%2fwp-content%2fuploads%2f2017%2f01%2fimage11.png&ehk=Dfig%2bRrxzZrrVIYV9srH3M3%2b6Y%2bN3WhOfnEJdM6SccI%3d&risl=&pid=ImgRaw&r=0&sres=1&sresct=1') no-repeat center center;
+        background-size: contain; /* Ajusta la imagen para que se ajuste al contenedor sin cortar */
+    }
+
+
+    .content {
+        position: relative;
+        z-index: 1;
+        padding: 20px;
+    }
+
+    .titulo-container {
+        margin: auto;
+        padding: 10px;
+        border: 2px solid #000;
+    }
+
+    .proveedor-container {
+        text-align: left;
+        padding: 5px;
+        border: 2px solid #000;
+        border-top: 1px solid transparent;
+        width: 300px;
+    }
+
+    .info-container {
+        margin: auto;
+        padding: 20px;
+        border: 2px solid #000;
+    }
+
+    .title {
+        text-align: center;
+        font-weight: bold;
+        font-family: Calibri;
+        font-size: 22px;
+        background-color: rgb(177, 177, 177);
+    }
+
+    .table-title {
+        text-align: center;
+        border-bottom: 2px solid black;
+        border-top: 2px solid black;
+        margin-top: 20px;
+        font-weight: bold;
+        font-family: Calibri;
+        font-size: 12px;
+    }
+
+    .header {
+        text-align: left;
+        margin-bottom: 5px;
+    }
+
+    .orden {
+        text-align: center;
+    }
+
+        .orden h1 {
+            margin: 0;
+        }
+
+    .info-section {
+        margin-bottom: 0px;
+    }
+
+        .info-section div {
+            margin-bottom: 0px;
+        }
+
+    .proveedor-vertical {
+        display: flex;
+        justify-content: center; /* Centra horizontalmente si es necesario */
+        align-items: center; /* Centra verticalmente */
+        /*height: 60vh;           /* Ajusta según la altura que necesites */
+    }
+
+    .info-section div span {
+        font-weight: bold;
+    }
+
+    .text-proveedor {
+        font-family: Calibri;
+        font-size: 12px;
+        margin-bottom: 0px;
+    }
+
+
+    .compra-table {
+        width: 100%;
+        border-collapse: collapse;
+        border-left: none;
+        border-right: none;
+    }
+
+        .compra-table th, .compra-table {
+            border: none;
+            text-align: left;
+            padding-left: 15px;
+            padding-right: 15px;
+            font-weight: lighter;
+        }
+
+            .compra-table th td {
+                background-color: transparent;
+            }
+
+    .product-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 25px;
+        border: none;
+    }
+
+        .product-table th, .product-table {
+            /* border-left: 2px solid rgb(177, 177, 177);
+            border-right: 2px solid rgb(177, 177, 177); */
+            text-align: center;
+            padding-left: 15px;
+            padding-right: 15px;
+            font-weight: lighter;
+        }
+
+            .product-table th td {
+                background-color: rgb(177, 177, 177);
+            }
+
+    .total-section {
+        font-family: Calibri;
+        font-size: 12px;
+        text-align: right;
+        border: none;
+    }
+
+    .inner-container {
+        display: flex;
+        justify-content: center; /* Centra horizontalmente */
+        align-items: center; /* Centra verticalmente */
+        width: 100%; /* Asegura que ocupe todo el ancho del contenedor */
+        height: 100%; /* Asegura que ocupe toda la altura del contenedor */
+    }
+
+    .tabla-th {
+        text-align: center;
+        padding-left: 10px;
+        padding-right: 10px;
+        font-weight: lighter;
+    }
+
+    .contenedor {
+        display: flex;
+        justify-content: center; /* Centra horizontalmente */
+        width: 100%; /* Asegura que ocupe todo el ancho del contenedor */
+        height: 100%; /* Asegura que ocupe toda la altura del contenedor */
+    }
+
+    .contenedor-cont {
+        display: flex;
+        justify-content: center; /* Centra horizontalmente */
+        width: 100%; /* Asegura que ocupe todo el ancho del contenedor */
+        height: 50%; /* Asegura que ocupe toda la altura del contenedor */
+    }
+
+    .white-final {
+        border-left: 2px solid black;
+        border-right: 2px solid black;
+        border-bottom: 2px solid black;
+    }
+
+    .white-total {
+        border-left: none;
+        /*border-right: none;*/
+        border-bottom: none;
+    }
+
+    .white-left-right {
+        border-left: 2px solid black;
+        border-right: 2px solid black;
+    }
+
+    .compra-white {
+        border-left: 2px solid black;
+        border-right: 2px solid black;
+        width: 450px;
+    }
+
+    .firmas {
+        font-family: Calibri;
+        font-size: 8px;
+        border-left: none;
+        border-right: none;
+        border-bottom: none;
+        border-top: 1px solid black;
+    }
+</style>
+
+
+<div class="content">
+        
+    <div class="header">
+        <table class="compra-table">
+            <tbody>
+                <tr style="border: none">
+                    <td style="width: 400px; text-align: center;">
+                        <div style="border: 2px solid black; border-radius: 10px; overflow: hidden; padding: 15px; background-color: rgb(177, 177, 177);">
+                            <div class="title">
+                                <span>PAGO DE RETENCIONES EN EL EXTRANJERO</span>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="white total-section">
+                    <th style="text-align: left; border: none; padding-top: 5px;"></th>
+                </tr>
+                <tr style="border: none;">
+                    <td style="width: 400px; text-align: left;">
+                        <div style="border: 2px solid black; border-radius: 10px; overflow: hidden; padding: 8px;">
+                            <div style="font-size: 24px;">
+                                <span><strong>CLAVE DE RETENCIÓN: </strong></span><br>
+                                <span>CveRetenc</span><br>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div>
+        <table class="product-table">
+            <tbody style="border: none;">
+                
+                <tr style="border: none">
+                    <td style="width: 600px; text-align: center;">
+                        <div style="border: 2px solid black; border-radius: 10px; overflow: hidden; padding: 5px; background-color: rgb(177, 177, 177);">
+                            <div class="title">
+                                <span>EMISOR</span>
+                            </div>
+                        </div>
+                    </td>
+
+                    <td style="text-align: left;">
+                        <div style="padding: 20px; font-size: 22px;">
+                            <div>
+                                <span><strong>FOLIO: </strong></span>
+                                <span>FolioID</span><br>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="footer">
+        <table class="product-table">
+            <tbody>
+                <tr class="white total-section">
+                    <th style="text-align: left; border: none;">
+                        <div class="qr-code">
+                            <img src="https://miracomohacerlo.com/wp-content/uploads/2016/10/codigo-qr.jpg" height="150" width="150" alt="QR Code">
+                        </div>
+                    </th>
+                    <th style="text-align: left; border: none; font-size: 11px; vertical-align: top;">
+                        <p><strong>SEELLO DEL EMISOR</strong></p>
+                        <p><strong>SEELLO DIGITAL DEL SAT</strong></p>
+                        <p><strong>CADENA ORIGINAL DEL COMPLEMENTO DE CERTIFICACIÓN DIGITAL DEL SAT</strong></p>
+                    </th>
+                </tr>
+            </tbody>
+        </table>
+        <p>Este documento es una representación impresa de un CFDI Versión 4.0 Página 1 de 1</p>
+    </div>
+</div>
+    
+<div class="watermark"></div>
+
